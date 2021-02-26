@@ -5,9 +5,7 @@ sudo apt update
 sudo apt install docker.io
 sudo apt install docker-compose
 
-cd /srv
-git clone https://github.com/FindoraNetwork/node-setup.git
-cd /srv/node-setup
+
 # init the tendermint
 sudo mkdir -p /mnt/data/tendermint
 sudo mkdir -p /mnt/data/ledger/
@@ -24,4 +22,5 @@ sudo cp genesis.json /mnt/data/tendermint/mainnet/node0/config/genesis.json
 # rm /mnt/data/tendermint/mainnet/node0/data/priv_validator_state.json
 sudo cp priv_validator_state.json /mnt/data/tendermint/mainnet/node0/data/priv_validator_state.json
 
+docker-compose down
 docker-compose up -d
