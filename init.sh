@@ -7,7 +7,7 @@ sudo apt install docker-compose
 
 cd /srv
 git clone https://github.com/FindoraNetwork/node-setup.git
-cd /node-setup
+cd /srv/node-setup
 # init the tendermint
 sudo mkdir -p /mnt/data/tendermint
 sudo mkdir -p /mnt/data/ledger/
