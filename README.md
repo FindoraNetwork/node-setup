@@ -39,3 +39,6 @@ Run init.sh
 . init.sh
 ```
 This script will automaticlly create a full node and connect to the Findora Alpha Network.
+
+### Network
+The node should open the port 8667, 8668, 8669 and 26657 to puclib with Security Group in AWS or fire work in GCP
