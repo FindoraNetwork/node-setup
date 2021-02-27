@@ -22,5 +22,5 @@ sudo cp genesis.json /mnt/data/tendermint/mainnet/node0/config/genesis.json
 # rm /mnt/data/tendermint/mainnet/node0/data/priv_validator_state.json
 sudo cp priv_validator_state.json /mnt/data/tendermint/mainnet/node0/data/priv_validator_state.json
 
-docker-compose down
-docker-compose up -d
+sudo docker-compose down
+sudo docker-compose up -d
