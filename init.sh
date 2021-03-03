@@ -2,8 +2,8 @@
 
 
 sudo apt update
-sudo apt install docker.io
-sudo apt install docker-compose
+sudo apt -y install docker.io
+sudo apt -y install docker-compose
 
 
 # init the tendermint
