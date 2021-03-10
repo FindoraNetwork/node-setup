@@ -6,6 +6,8 @@ sudo apt -y install docker.io
 sudo apt -y install docker-compose
 
 
+sudo rm -r /mnt/data/tendermint
+sudo rm -r /mnt/data/ledger
 # init the tendermint
 sudo mkdir -p /mnt/data/tendermint
 sudo mkdir -p /mnt/data/ledger/

@@ -2,7 +2,7 @@ version: '2.2'
 services:
   node:
     container_name: node
-    image: "public.ecr.aws/k6m5b6e2/demo/tendermint:v0.1.1"
+    image: "public.ecr.aws/k6m5b6e2/demo/tendermint:latest"
     command:
       [
         'node',
@@ -21,7 +21,7 @@ services:
   
   abci:
     container_name: abci
-    image: "public.ecr.aws/k6m5b6e2/demo/abci_validator_node:v0.1.1"
+    image: "public.ecr.aws/k6m5b6e2/demo/abci_validator_node:latest"
 
     environment:
       - LEDGER_DIR=/var/ledger
@@ -43,7 +43,7 @@ services:
 
   query_server:
     container_name: query_server
-    image: "public.ecr.aws/k6m5b6e2/demo/query_server:v0.1.1"
+    image: "public.ecr.aws/k6m5b6e2/demo/query_server:latest"
 
     environment:
       - LEDGER_HOST=abci
