@@ -43,5 +43,5 @@ rm config/config.toml.original
 
 #
 #
-#docker-compose up -d
+docker-compose up -d
 
