@@ -28,8 +28,6 @@ docker run -it --rm -v $PWD/.Findora-Node/data/tendermint/:/tendermint tendermin
 # shellcheck disable=SC2164
 # shellcheck disable=SC2103
 cd -
-
-new_name="s/CHANGE_NODE_NAME/${moniker}/g"
 # shellcheck disable=SC2016
 sed -i'.original' -e "s/CHANGE_NODE_NAME/${moniker}/g" config/config.toml
 cp config/config.toml ~/.Findora-Node/data/tendermint/mainnet/node0/config/config.toml
@@ -41,7 +39,5 @@ cp config/priv_validator_state.json ~/.Findora-Node/data/tendermint/mainnet/node
 cp config/config.toml.original config/config.toml
 rm config/config.toml.original
 
-#
-#
 docker-compose up -d
 
