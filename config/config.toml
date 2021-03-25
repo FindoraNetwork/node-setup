@@ -172,7 +172,7 @@ external_address = ""
 seeds = ""
 
 # Comma separated list of nodes to keep persistent connections to
-persistent_peers = "285e969f0b3548c151e66357f79bb101ca70e8f5@prod-alpha-us-west-2-sentry-000.prod.findora.org:26656,523dd4b47f872077b26d11079be2fd786bd53016@prod-alpha-us-west-2-sentry-001.prod.findora.org:26656,"
+persistent_peers = "285e969f0b3548c151e66357f79bb101ca70e8f5@prod-alpha-us-west-2-sentry-000-public.prod.findora.org:26656,523dd4b47f872077b26d11079be2fd786bd53016@prod-alpha-us-west-2-sentry-001-public.prod.findora.org:26656,"
 # persistent_peers = "4c8ba277519df15ce3d8bb52b1ff9ce74ec4a69f@82.156.105.133:26656"
 # UPNP port forwarding
 upnp = false
