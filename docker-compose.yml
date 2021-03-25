@@ -2,7 +2,7 @@ version: '2.2'
 services:
   node:
     container_name: node
-    image: "public.ecr.aws/k6m5b6e2/demo/tendermint:latest"
+    image: "public.ecr.aws/k6m5b6e2/demo/tendermint:v0.1.3"
     command:
       [
         'node',
@@ -21,16 +21,16 @@ services:
   
   abci:
     container_name: abci
-    image: "public.ecr.aws/k6m5b6e2/demo/abci_validator_node:latest"
+    image: "public.ecr.aws/k6m5b6e2/demo/abci_validator_node:v0.1.3"
 
     environment:
       - LEDGER_DIR=/var/ledger
-      - RUST_LOG=info,tokio_reactor=warn
+      - RUST_LOG=warn,tokio_reactor=warn
       - TENDERMINT_HOST=node
       - ABCI_HOST=0.0.0.0
       - SERVER_HOST=0.0.0.0
       - LEDGER_HOST=0.0.0.0
-      - RUST_LOG=info
+      - RUST_LOG=warn
     ports:
       - "8668:8668"
       - "8669:8669"
@@ -43,7 +43,7 @@ services:
 
   query_server:
     container_name: query_server
-    image: "public.ecr.aws/k6m5b6e2/demo/query_server:latest"
+    image: "public.ecr.aws/k6m5b6e2/demo/query_server:v0.1.3"
 
     environment:
       - LEDGER_HOST=abci
