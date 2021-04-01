@@ -36,7 +36,7 @@ fast_sync = true
 #   - EXPERIMENTAL
 #   - requires gcc
 #   - use rocksdb build tag (go build -tags rocksdb)
-db_backend = "goleveldb"
+db_backend = "cleveldb"
 
 # Database directory
 db_dir = "data"
@@ -172,8 +172,7 @@ external_address = ""
 seeds = ""
 
 # Comma separated list of nodes to keep persistent connections to
-persistent_peers = "285e969f0b3548c151e66357f79bb101ca70e8f5@prod-alpha-us-west-2-sentry-000-public.prod.findora.org:26656,523dd4b47f872077b26d11079be2fd786bd53016@prod-alpha-us-west-2-sentry-001-public.prod.findora.org:26656,"
-# persistent_peers = "4c8ba277519df15ce3d8bb52b1ff9ce74ec4a69f@82.156.105.133:26656"
+persistent_peers = "b142ed77553dd9f0610c0f73da828cbfd582f561@prod-alpha-us-west-2-sentry-000-public.prod.findora.org:26656,04be78ee995d3c38db4ebab36d50954172be2e8d@prod-alpha-us-west-2-sentry-001-public.prod.findora.org:26656,"
 # UPNP port forwarding
 upnp = false
 
