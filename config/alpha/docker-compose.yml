@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   node:
-    container_name: node
+    container_name: alpha_node
     image: "public.ecr.aws/k6m5b6e2/demo/tendermint:v0.1.4"
     command:
       [
@@ -13,20 +13,20 @@ services:
     ports:
       - "26656-26657:26656-26657"
     volumes:
-      - /mnt/data/tendermint/mainnet/node0:/root/.tendermint
+      - /mnt/findora-alpha/data/tendermint/mainnet/node0:/root/.tendermint
     depends_on:
       - abci
     restart: always
 
   
   abci:
-    container_name: abci
+    container_name: alpha_abci
     image: "public.ecr.aws/k6m5b6e2/demo/abci_validator_node:v0.1.4"
 
     environment:
       - LEDGER_DIR=/var/ledger
       - RUST_LOG=warn,tokio_reactor=warn
-      - TENDERMINT_HOST=node
+      - TENDERMINT_HOST=alpha_node
       - ABCI_HOST=0.0.0.0
       - SERVER_HOST=0.0.0.0
       - LEDGER_HOST=0.0.0.0
@@ -36,17 +36,17 @@ services:
       - "8669:8669"
       - "26658:26658"
     volumes:
-      - /mnt/data/ledger:/var/ledger
+      - /mnt/findora-alpha/data/ledger:/var/ledger
 
     restart: always
 
 
   query_server:
-    container_name: query_server
+    container_name: alpha_query_server
     image: "public.ecr.aws/k6m5b6e2/demo/query_server:v0.1.4"
 
     environment:
-      - LEDGER_HOST=abci
+      - LEDGER_HOST=alph_abci
       - LEDGER_PORT=8668
       - LEDGER_PROTOCOL=http
       - QUERY_PORT=8667
