@@ -1,0 +1,60 @@
+version: '2.2'
+services:
+  node:
+    container_name: node
+    image: "public.ecr.aws/k6m5b6e2/demo/tendermint:v0.1.4"
+    command:
+      [
+        'node',
+        '--proxy_app=tcp://abci:26658',
+        '--rpc.laddr=tcp://0.0.0.0:26657'
+      ]
+
+    ports:
+      - "26656-26657:26656-26657"
+    volumes:
+      - /mnt/data/tendermint/mainnet/node0:/root/.tendermint
+    depends_on:
+      - abci
+    restart: always
+
+  
+  abci:
+    container_name: abci
+    image: "public.ecr.aws/k6m5b6e2/demo/abci_validator_node:v0.1.4"
+
+    environment:
+      - LEDGER_DIR=/var/ledger
+      - RUST_LOG=warn,tokio_reactor=warn
+      - TENDERMINT_HOST=node
+      - ABCI_HOST=0.0.0.0
+      - SERVER_HOST=0.0.0.0
+      - LEDGER_HOST=0.0.0.0
+      - RUST_LOG=warn
+    ports:
+      - "8668:8668"
+      - "8669:8669"
+      - "26658:26658"
+    volumes:
+      - /mnt/data/ledger:/var/ledger
+
+    restart: always
+
+
+  query_server:
+    container_name: query_server
+    image: "public.ecr.aws/k6m5b6e2/demo/query_server:v0.1.4"
+
+    environment:
+      - LEDGER_HOST=abci
+      - LEDGER_PORT=8668
+      - LEDGER_PROTOCOL=http
+      - QUERY_PORT=8667
+      - QUERY_SERVER_HOST=0.0.0.0
+      - RUST_LOG=info,tokio_reactor=warn
+    ports:
+      - "8667:8667"
+    depends_on:
+      - abci
+    restart: always
+
