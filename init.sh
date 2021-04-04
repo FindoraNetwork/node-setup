@@ -52,7 +52,7 @@ function mainnet()
     
     
     sudo cp config/mainnet/config.toml /mnt/findora-mainnet/data/tendermint/mainnet/node0/config/config.toml
-    sed -i'.original' -e "s/CHANGE_NODE_NAME/${moniker}/g" /mnt/findora-mainnet/data/tendermint/mainnet/node0/config/config.toml
+    sed -i'.original' -e "s/CHANGE_NODE_NAME/${node_name}/g" /mnt/findora-mainnet/data/tendermint/mainnet/node0/config/config.toml
 
     sudo cp config/mainnet/genesis.json /mnt/findora-mainnet/data/tendermint/mainnet/node0/config/genesis.json
 

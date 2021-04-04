@@ -1,7 +1,10 @@
-## Setup the full node and connect to the Findora Alpha network
+## Setup the full node and connect to the Findora Alpha/Mainnet network
 
 ### Introduction
-Build a full node in your server and connect to the Findora Alpha network.
+Build a full node in your server and connect to the Findora Alpha/Mainnet network.
+Alpha is for the integration and test only.
+
+One instance jusy can deploy one full node now.
 
 ### System requirement
 
@@ -23,22 +26,12 @@ git clone https://github.com/FindoraNetwork/node-setup.git
 cd node-setup
 ```
 
-**IMPORTANT**
 
-**Change the node name in config.toml**
-
-config/config.toml 
-
-line 15-16
-```
-# A custom human readable name for this node
-moniker = "CHANGE_NODE_NAME"
-```
 Run init.sh
 ```
 . init.sh
 ```
-This script will automaticlly create a full node and connect to the Findora Alpha Network.
+Follow the isntruction, the script will automaticlly create a full node and connect to the Findora Network.
 
 ### Network
 The node should open the port 8667, 8668, 8669 and 26657 to puclib with Security Group in AWS or fire work in GCP
@@ -61,7 +54,7 @@ The image tag can change to latest for the latest version or a specific version 
 
 The system can update with the code:
 ```
-cd /srv/node-setup
+cd /srv/node-setup/config/{network-name}
 docker-compose down
 docker-compose up -d
 ```
