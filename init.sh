@@ -1,30 +1,5 @@
 #!/bin/sh
 
-echo "Installing docker and docker-compose"
-# sudo apt update
-# sudo apt -y install docker.io
-# sudo apt -y install docker-compose
-
-
-
-PS3='Welcome to Findora full node setup tool. Please selet the network: '
-options=("Alpha" "Mainnet" "Quit")
-select opt in "${options[@]}"
-do
-    case $opt in
-        "Option 1")
-            alpha
-            ;;
-        "Option 2")
-            echo "you chose choice 2"
-            ;;
-        "Quit")
-            break
-            ;;
-        *) echo "invalid option $REPLY";;
-    esac
-done
-
 
 function alpha()
 {
@@ -95,3 +70,26 @@ function mainnet()
     echo "Ledger data: /mnt/data/ledger/"
     echo "Tendermint data: /mnt/data/tendermint"
 }
+
+PS3='Welcome to Findora full node setup tool. Please selet the network: '
+options=("Alpha" "Mainnet" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Alpha")
+            echo "Setup a full node for Alpha"
+            alpha
+            ;;
+        "Mainnet")
+            echo "Setup a full node for Mainnet"
+            mainnet
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+    break
+done
+
+
