@@ -60,9 +60,9 @@ function mainnet()
     cd config/mainnet
     sudo docker-compose down
     sudo docker-compose up -d
-    echo "Full node for Alpha setup done. "
-    echo "Ledger data: /mnt/data/ledger/"
-    echo "Tendermint data: /mnt/data/tendermint"
+    echo "Full node for Mainnet setup done. "
+    echo "Ledger data: /mnt/findora-mainnet/data/ledger/"
+    echo "Tendermint data: /mnt/findora-mainnet/data/tendermint"
 }
 
 PS3='Welcome to Findora full node setup tool. Please selet the network: '

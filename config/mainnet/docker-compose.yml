@@ -13,7 +13,7 @@ services:
     ports:
       - "26656-26657:26656-26657"
     volumes:
-      - /mnt/data/tendermint/mainnet/node0:/root/.tendermint
+      - /mnt/findora-mainnet/data/tendermint/mainnet/node0:/root/.tendermint
     depends_on:
       - abci
     restart: always
@@ -36,7 +36,7 @@ services:
       - "8669:8669"
       - "26658:26658"
     volumes:
-      - /mnt/data/ledger:/var/ledger
+      - /mnt/findora-mainnet/data/ledger:/var/ledger
 
     restart: always
 
