@@ -15,7 +15,7 @@ services:
       - "26656-26657:26656-26657"
       - "26660:26660"
     volumes:
-      - /data/tendermint/mainnet/node0:/root/.tendermint
+      - /mnt/findora-qa01/data/tendermint/mainnet/node0:/root/.tendermint
     depends_on:
       - abci
     restart: always
@@ -45,7 +45,7 @@ services:
       - "8669:8669"
       - "26658:26658"
     volumes:
-      - /data/ledger:/var/ledger
-      - /data/tendermint/mainnet/node0:/root/.tendermint
+      - /mnt/findora-qa01/data/ledger:/var/ledger
+      - /mnt/findora-qa01/data/tendermint/mainnet/node0:/root/.tendermint
     restart: always
 
