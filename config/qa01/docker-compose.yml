@@ -1,0 +1,85 @@
+version: '2.2'
+services:
+  node:
+    container_name: node
+    # image: "358484141435.dkr.ecr.us-west-2.amazonaws.com/dev/tendermint:develop-2a28fcf"
+    image: "358484141435.dkr.ecr.us-west-2.amazonaws.com/release/tendermint:v0.1.0-toy-2"
+    # image: "public.ecr.aws/k6m5b6e2/demo/tendermint:v0.1.1"
+    command:
+      [
+        'node',
+        '--proxy_app=tcp://abci:26658',
+        '--rpc.laddr=tcp://0.0.0.0:26657'
+      ]
+    ports:
+      - "26656-26657:26656-26657"
+      - "26660:26660"
+    volumes:
+      - /data/tendermint/mainnet/node0:/root/.tendermint
+    depends_on:
+      - abci
+    restart: always
+
+  abci:
+    container_name: abci
+    image: "358484141435.dkr.ecr.us-west-2.amazonaws.com/dev/abci_validator_node:develop-6845b0c"
+    # image: "358484141435.dkr.ecr.us-west-2.amazonaws.com/release/abci_validator_node:v0.1.0-toy-2"
+    # image: "public.ecr.aws/k6m5b6e2/demo/abci_validator_node:v0.1.1"
+    environment:
+      - LEDGER_DIR=/var/ledger
+      - RUST_LOG=warn,tokio_reactor=warn
+      - TENDERMINT_HOST=node
+      - ABCI_HOST=0.0.0.0
+      - SERVER_HOST=0.0.0.0
+      - LEDGER_HOST=0.0.0.0
+      - RUST_LOG=warn
+      # - ADDR_BLK_LIST_TS_START=1617556438
+      # - ADDR_BLK_LIST_TS_END=1917556438
+      # - ADDR_BLK_LIST=fra1qav28u7qsgh2c9e0hyfkkdc0nk5fyq6pwg2klxl8tgk24nfg5jnsx5uh22,fra137zfxx6au9hs50uxnkvef0q72yxv0cy6npu45j5jfdnkuf9wxp8q900sa0,fra1cjquumyp4ufz5lxqmv9czlju7gn3lf003t92p58f7z8fc8997e4sp6kn3u,fra15wmgnw228dre2pcypyc460wp2qh95q0pexupxzg2kts6xsl9l5wq9y5ckz
+
+      - ENABLE_LEDGER_SERVICE=true
+      - ENABLE_QUERY_SERVICE=true
+    ports:
+      - "8667:8667"
+      - "8668:8668"
+      - "8669:8669"
+      - "26658:26658"
+    volumes:
+      - /data/ledger:/var/ledger
+      - /data/tendermint/mainnet/node0:/root/.tendermint
+    restart: always
+
+  # query_server:
+  #   container_name: query_server
+  #   image: "358484141435.dkr.ecr.us-west-2.amazonaws.com/dev/query_server:develop-cc18050"
+  #   # image: "358484141435.dkr.ecr.us-west-2.amazonaws.com/release/query_server:develop-6a4d08b"
+  #   # image: "358484141435.dkr.ecr.us-west-2.amazonaws.com/dev/query_server:master-a3b3a4a"
+  #   # image: "public.ecr.aws/k6m5b6e2/demo/query_server:v0.1.1"
+  #   environment:
+  #     - LEDGER_HOST=abci
+  #     - LEDGER_PORT=8668
+  #     - LEDGER_PROTOCOL=http
+  #     - QUERY_PORT=8667
+  #     - QUERY_SERVER_HOST=0.0.0.0
+  #     - RUST_LOG=info,tokio_reactor=warn
+  #   # ports:
+  #     - "8667:8667"
+  #   depends_on:
+  #     - abci
+  #   restart: always
+
+  fluentd:
+    container_name: fluentd
+    image: "fluent"
+    build:    
+      context: .
+      dockerfile: ./Dockerfile-fluentd
+    hostname: ${HOSTNAME}
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    volumes:
+      - /var/lib/docker:/var/lib/docker:ro
+      - /opt/fluentd/config/fluentd.conf:/fluentd/etc/fluent.conf
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: always
